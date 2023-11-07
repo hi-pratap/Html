@@ -1,0 +1,5 @@
+﻿ID,Name,Description,Project,Date Added,Status
+SPT-1,Fetch Properties From Yml,Yml to code main kaise properties lete hai,UIA,"November 6, 2023",Added
+SPT-2,Prerequesites In project,,EZXCHANGE,,In-Box
+SPT-3,Standard Exception Handling,Standard Way of custom exception Handling,EZXCHANGE,,In-Box
+SPT-4,Creating json column for Database for Multiple classes,Adding json type data in Database Column,UIA,,In-Box
