@@ -1,0 +1,706 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>01-DOCKER</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="cdcc7fe9-b944-4942-ad5b-ade4d22edd14" class="page sans"><header><img class="page-cover-image" src="https://images.unsplash.com/photo-1646627927863-19874c27316b?ixlib=rb-4.0.3&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">🚢</span></div><h1 class="page-title">01-DOCKER</h1><p class="page-description"></p><table class="properties"><tbody><tr class="property-row property-row-auto_increment_id"><th><span class="icon property-icon"><svg role="graphics-symbol" viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0" class="typesId"><path d="M12.252 7.9209C13.7217 7.9209 14.7266 6.93652 14.7266 5.50781C14.7266 4.0791 13.7217 3.10156 12.252 3.10156C10.8232 3.10156 9.8457 4.0791 9.8457 5.50781C9.8457 6.93652 10.8301 7.9209 12.252 7.9209ZM2.00488 13.1367C2.45605 13.1367 2.72949 12.8496 2.72949 12.3848V5.83594L7.35059 12.5967C7.6377 12.9932 7.86328 13.1367 8.20508 13.1367C8.69043 13.1367 8.96387 12.8359 8.96387 12.3232V3.8877C8.96387 3.42285 8.69043 3.12891 8.23242 3.12891C7.78809 3.12891 7.50781 3.41602 7.50781 3.8877V10.4229L2.89355 3.66895C2.60645 3.25879 2.40137 3.12891 2.03906 3.12891C1.56738 3.12891 1.27344 3.4502 1.27344 3.94238V12.3848C1.27344 12.8496 1.55371 13.1367 2.00488 13.1367ZM12.252 6.84766C11.5615 6.84766 11.0898 6.30762 11.0898 5.50781C11.0898 4.70801 11.5615 4.16797 12.252 4.16797C12.9902 4.16797 13.4756 4.70801 13.4756 5.50781C13.4756 6.30762 12.9834 6.84766 12.252 6.84766ZM10.625 9.77344H13.9541C14.3506 9.77344 14.624 9.54102 14.624 9.14453C14.624 8.74805 14.3506 8.50195 13.9541 8.50195H10.625C10.2285 8.50195 9.96191 8.74805 9.96191 9.14453C9.96191 9.54102 10.2285 9.77344 10.625 9.77344Z"></path></svg></span>ID</th><td>DOPS-5</td></tr><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg role="graphics-symbol" viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0" class="typesCreatedAt"><path d="M8 15.126C11.8623 15.126 15.0615 11.9336 15.0615 8.06445C15.0615 4.20215 11.8623 1.00293 7.99316 1.00293C4.13086 1.00293 0.938477 4.20215 0.938477 8.06445C0.938477 11.9336 4.1377 15.126 8 15.126ZM8 13.7383C4.85547 13.7383 2.33301 11.209 2.33301 8.06445C2.33301 4.91992 4.84863 2.39746 7.99316 2.39746C11.1377 2.39746 13.6738 4.91992 13.6738 8.06445C13.6738 11.209 11.1445 13.7383 8 13.7383ZM4.54102 8.91211H7.99316C8.30078 8.91211 8.54004 8.67285 8.54004 8.37207V3.8877C8.54004 3.58691 8.30078 3.34766 7.99316 3.34766C7.69238 3.34766 7.45312 3.58691 7.45312 3.8877V7.83203H4.54102C4.2334 7.83203 4.00098 8.06445 4.00098 8.37207C4.00098 8.67285 4.2334 8.91211 4.54102 8.91211Z"></path></svg></span>Created</th><td><time>@July 31, 2023 4:17 PM</time></td></tr><tr class="property-row property-row-file"><th><span class="icon property-icon"><svg role="graphics-symbol" viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0" class="typesFile"><path d="M12.5938 8.44043L7.54883 13.4854C6.26367 14.7773 4.54102 14.6475 3.44043 13.54C2.32617 12.4326 2.20312 10.7168 3.49512 9.4248L10.3926 2.52734C11.1445 1.77539 12.2725 1.63867 13.0039 2.37695C13.7422 3.11523 13.6055 4.22949 12.8535 4.98828L6.08594 11.7627C5.77832 12.0703 5.41602 11.9814 5.2041 11.7764C4.99902 11.5576 4.91016 11.2021 5.21777 10.8877L9.93457 6.1709C10.1738 5.93164 10.1875 5.58301 9.96191 5.35059C9.72949 5.13184 9.38086 5.13867 9.1416 5.37793L4.39746 10.1152C3.67285 10.8535 3.7002 11.9746 4.34961 12.624C5.05371 13.3281 6.12012 13.3145 6.8584 12.5762L13.6602 5.77441C14.9795 4.45508 14.9316 2.71875 13.7764 1.55664C12.6416 0.428711 10.8779 0.34668 9.55176 1.66602L2.61328 8.61816C0.883789 10.3477 1 12.8291 2.57227 14.4014C4.14453 15.9668 6.63281 16.0898 8.3623 14.3672L13.4414 9.28809C13.6738 9.0625 13.667 8.64551 13.4346 8.41992C13.209 8.18066 12.833 8.21484 12.5938 8.44043Z"></path></svg></span>Files &amp; media</th><td><span style="margin-right:6px"><a href="https://drive.google.com/file/d/1lAW5phx1bjnsVl0f8kcsCd5wHfQUvS6F/view?usp=drive_link">https://drive.google.com/file/d/1lAW5phx1bjnsVl0f8kcsCd5wHfQUvS6F/view?usp=drive_link</a></span></td></tr><tr class="property-row property-row-select"><th><span class="icon property-icon"><svg role="graphics-symbol" viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0" class="typesSelect"><path d="M8 15.126C11.8623 15.126 15.0615 11.9336 15.0615 8.06445C15.0615 4.20215 11.8623 1.00293 7.99316 1.00293C4.13086 1.00293 0.938477 4.20215 0.938477 8.06445C0.938477 11.9336 4.1377 15.126 8 15.126ZM8 13.7383C4.85547 13.7383 2.33301 11.209 2.33301 8.06445C2.33301 4.91992 4.84863 2.39746 7.99316 2.39746C11.1377 2.39746 13.6738 4.91992 13.6738 8.06445C13.6738 11.209 11.1445 13.7383 8 13.7383ZM7.62402 10.6348C7.79492 10.915 8.20508 10.9287 8.37598 10.6348L10.666 6.73145C10.8574 6.41016 10.7002 6.04102 10.3652 6.04102H5.62793C5.29297 6.04102 5.14941 6.43066 5.32031 6.73145L7.62402 10.6348Z"></path></svg></span>Select</th><td><span class="selected-value select-value-color-default">devops</span></td></tr><tr class="property-row property-row-date"><th><span class="icon property-icon"><svg role="graphics-symbol" viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0" class="typesDate"><path d="M3.29688 14.4561H12.7031C14.1797 14.4561 14.9453 13.6904 14.9453 12.2344V3.91504C14.9453 2.45215 14.1797 1.69336 12.7031 1.69336H3.29688C1.82031 1.69336 1.05469 2.45215 1.05469 3.91504V12.2344C1.05469 13.6973 1.82031 14.4561 3.29688 14.4561ZM3.27637 13.1162C2.70898 13.1162 2.39453 12.8154 2.39453 12.2207V5.9043C2.39453 5.30273 2.70898 5.00879 3.27637 5.00879H12.71C13.2842 5.00879 13.6055 5.30273 13.6055 5.9043V12.2207C13.6055 12.8154 13.2842 13.1162 12.71 13.1162H3.27637ZM6.68066 7.38086H7.08398C7.33008 7.38086 7.41211 7.30566 7.41211 7.05957V6.66309C7.41211 6.41699 7.33008 6.3418 7.08398 6.3418H6.68066C6.44141 6.3418 6.35938 6.41699 6.35938 6.66309V7.05957C6.35938 7.30566 6.44141 7.38086 6.68066 7.38086ZM8.92285 7.38086H9.31934C9.56543 7.38086 9.64746 7.30566 9.64746 7.05957V6.66309C9.64746 6.41699 9.56543 6.3418 9.31934 6.3418H8.92285C8.67676 6.3418 8.59473 6.41699 8.59473 6.66309V7.05957C8.59473 7.30566 8.67676 7.38086 8.92285 7.38086ZM11.1582 7.38086H11.5547C11.8008 7.38086 11.8828 7.30566 11.8828 7.05957V6.66309C11.8828 6.41699 11.8008 6.3418 11.5547 6.3418H11.1582C10.9121 6.3418 10.8301 6.41699 10.8301 6.66309V7.05957C10.8301 7.30566 10.9121 7.38086 11.1582 7.38086ZM4.44531 9.58203H4.84863C5.09473 9.58203 5.17676 9.50684 5.17676 9.26074V8.86426C5.17676 8.61816 5.09473 8.54297 4.84863 8.54297H4.44531C4.20605 8.54297 4.12402 8.61816 4.12402 8.86426V9.26074C4.12402 9.50684 4.20605 9.58203 4.44531 9.58203ZM6.68066 9.58203H7.08398C7.33008 9.58203 7.41211 9.50684 7.41211 9.26074V8.86426C7.41211 8.61816 7.33008 8.54297 7.08398 8.54297H6.68066C6.44141 8.54297 6.35938 8.61816 6.35938 8.86426V9.26074C6.35938 9.50684 6.44141 9.58203 6.68066 9.58203ZM8.92285 9.58203H9.31934C9.56543 9.58203 9.64746 9.50684 9.64746 9.26074V8.86426C9.64746 8.61816 9.56543 8.54297 9.31934 8.54297H8.92285C8.67676 8.54297 8.59473 8.61816 8.59473 8.86426V9.26074C8.59473 9.50684 8.67676 9.58203 8.92285 9.58203ZM11.1582 9.58203H11.5547C11.8008 9.58203 11.8828 9.50684 11.8828 9.26074V8.86426C11.8828 8.61816 11.8008 8.54297 11.5547 8.54297H11.1582C10.9121 8.54297 10.8301 8.61816 10.8301 8.86426V9.26074C10.8301 9.50684 10.9121 9.58203 11.1582 9.58203ZM4.44531 11.7832H4.84863C5.09473 11.7832 5.17676 11.708 5.17676 11.4619V11.0654C5.17676 10.8193 5.09473 10.7441 4.84863 10.7441H4.44531C4.20605 10.7441 4.12402 10.8193 4.12402 11.0654V11.4619C4.12402 11.708 4.20605 11.7832 4.44531 11.7832ZM6.68066 11.7832H7.08398C7.33008 11.7832 7.41211 11.708 7.41211 11.4619V11.0654C7.41211 10.8193 7.33008 10.7441 7.08398 10.7441H6.68066C6.44141 10.7441 6.35938 10.8193 6.35938 11.0654V11.4619C6.35938 11.708 6.44141 11.7832 6.68066 11.7832ZM8.92285 11.7832H9.31934C9.56543 11.7832 9.64746 11.708 9.64746 11.4619V11.0654C9.64746 10.8193 9.56543 10.7441 9.31934 10.7441H8.92285C8.67676 10.7441 8.59473 10.8193 8.59473 11.0654V11.4619C8.59473 11.708 8.67676 11.7832 8.92285 11.7832Z"></path></svg></span>Date</th><td><time>@November 30, 2023</time></td></tr><tr class="property-row property-row-formula"><th><span class="icon property-icon"><svg role="graphics-symbol" viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0" class="typesFormula"><path d="M5.04688 14.3604H11.2744C11.7324 14.3604 12.0537 14.0801 12.0537 13.6494C12.0537 13.2119 11.7324 12.9248 11.2744 12.9248H5.81934V12.8564L9.30566 8.82324C9.54492 8.57031 9.6748 8.29688 9.6748 8.0166C9.6748 7.73633 9.54492 7.45605 9.29883 7.20996L5.81934 3.2793V3.21094H11.2812C11.7393 3.21094 12.0537 2.92383 12.0537 2.48633C12.0537 2.05566 11.7393 1.77539 11.2812 1.77539H5.05371C4.34277 1.77539 3.95312 2.26758 3.95312 2.81445C3.95312 3.12207 4.07617 3.44336 4.33594 3.69629L8.15039 7.96875V8.05078L4.3291 12.4395C4.06934 12.6924 3.94629 13.0137 3.94629 13.3213C3.94629 13.8682 4.33594 14.3604 5.04688 14.3604Z"></path></svg></span>Days Left</th><td>📅 23 days left</td></tr><tr class="property-row property-row-status"><th><span class="icon property-icon"><svg role="graphics-symbol" viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0" class="typesStatus"><path d="M8.75488 1.02344C8.75488 0.613281 8.41309 0.264648 8.00293 0.264648C7.59277 0.264648 7.25098 0.613281 7.25098 1.02344V3.11523C7.25098 3.51855 7.59277 3.86719 8.00293 3.86719C8.41309 3.86719 8.75488 3.51855 8.75488 3.11523V1.02344ZM3.91504 5.0293C4.20215 5.31641 4.69434 5.32324 4.97461 5.03613C5.26855 4.74902 5.26855 4.25684 4.98145 3.96973L3.53906 2.52051C3.25195 2.2334 2.7666 2.21973 2.47949 2.50684C2.19238 2.79395 2.18555 3.28613 2.47266 3.57324L3.91504 5.0293ZM10.9629 4.01758C10.6826 4.30469 10.6826 4.79688 10.9697 5.08398C11.2568 5.37109 11.749 5.36426 12.0361 5.07715L13.4854 3.62793C13.7725 3.34082 13.7725 2.84863 13.4785 2.55469C13.1982 2.27441 12.7061 2.27441 12.4189 2.56152L10.9629 4.01758ZM15.0234 8.78906C15.4336 8.78906 15.7822 8.44727 15.7822 8.03711C15.7822 7.62695 15.4336 7.28516 15.0234 7.28516H12.9385C12.5283 7.28516 12.1797 7.62695 12.1797 8.03711C12.1797 8.44727 12.5283 8.78906 12.9385 8.78906H15.0234ZM0.975586 7.28516C0.56543 7.28516 0.223633 7.62695 0.223633 8.03711C0.223633 8.44727 0.56543 8.78906 0.975586 8.78906H3.07422C3.48438 8.78906 3.83301 8.44727 3.83301 8.03711C3.83301 7.62695 3.48438 7.28516 3.07422 7.28516H0.975586ZM12.0361 10.9902C11.749 10.71 11.2568 10.71 10.9629 10.9971C10.6826 11.2842 10.6826 11.7764 10.9697 12.0635L12.4258 13.5127C12.7129 13.7998 13.2051 13.793 13.4922 13.5059C13.7793 13.2256 13.7725 12.7266 13.4854 12.4395L12.0361 10.9902ZM2.52051 12.4395C2.22656 12.7266 2.22656 13.2188 2.50684 13.5059C2.79395 13.793 3.28613 13.7998 3.57324 13.5127L5.02246 12.0703C5.31641 11.7832 5.31641 11.291 5.03613 11.0039C4.74902 10.7168 4.25684 10.71 3.96973 10.9971L2.52051 12.4395ZM8.75488 12.9658C8.75488 12.5557 8.41309 12.207 8.00293 12.207C7.59277 12.207 7.25098 12.5557 7.25098 12.9658V15.0576C7.25098 15.4609 7.59277 15.8096 8.00293 15.8096C8.41309 15.8096 8.75488 15.4609 8.75488 15.0576V12.9658Z"></path></svg></span>Status</th><td><span class="status-value select-value-color-blue"><div class="status-dot status-dot-color-blue"></div>In progress</span></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg role="graphics-symbol" viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0" class="typesUrl"><path d="M7.69922 10.8945L8.73828 9.84863C7.91797 9.77344 7.34375 9.51367 6.91992 9.08984C5.76465 7.93457 5.76465 6.29395 6.91309 5.14551L9.18262 2.87598C10.3379 1.7207 11.9717 1.7207 13.127 2.87598C14.2891 4.04492 14.2822 5.67188 13.1338 6.82031L11.958 7.99609C12.1768 8.49512 12.2451 9.10352 12.1289 9.62988L14.0908 7.6748C15.7725 6 15.7793 3.62109 14.084 1.92578C12.3887 0.223633 10.0098 0.237305 8.33496 1.91211L5.95605 4.29785C4.28125 5.97266 4.26758 8.35156 5.96289 10.0469C6.36621 10.4434 6.90625 10.7441 7.69922 10.8945ZM8.30078 5.13184L7.26855 6.17773C8.08203 6.25293 8.66309 6.51953 9.08008 6.93652C10.2422 8.09863 10.2422 9.73242 9.08691 10.8809L6.81738 13.1504C5.66211 14.3057 4.03516 14.3057 2.87305 13.1504C1.71094 11.9883 1.71777 10.3545 2.87305 9.20605L4.04199 8.03027C3.83008 7.53125 3.75488 6.92969 3.87109 6.39648L1.91602 8.35156C0.234375 10.0264 0.227539 12.4121 1.92285 14.1074C3.61816 15.8027 5.99707 15.7891 7.67188 14.1143L10.0439 11.7354C11.7256 10.0537 11.7324 7.6748 10.0371 5.98633C9.64062 5.58301 9.10059 5.28223 8.30078 5.13184Z"></path></svg></span>URL</th><td><a href="https://iz-my.sharepoint.com/:f:/g/personal/pratap_adhav_intelizign_com/ElTNMyk537VMhJ8yG_XPuOEBw4EVJG6eSFgSZIb5bL1R7Q?e=mj42ij" class="url-value">https://iz-my.sharepoint.com/:f:/g/personal/pratap_adhav_intelizign_com/ElTNMyk537VMhJ8yG_XPuOEBw4EVJG6eSFgSZIb5bL1R7Q?e=mj42ij</a></td></tr></tbody></table></header><div class="page-body"><div id="7515c5b1-3c37-45ff-91ab-89ea2a57700a" class="column-list"><div id="750656e6-e99c-4a5a-a24e-e806d12ac42d" style="width:37.5%" class="column"><ul id="46e6af03-3ebf-4de5-9830-9f332e39381b" class="to-do-list"><li><div class="checkbox checkbox-on"></div> <span class="to-do-children-checked">lecture 1</span><div class="indented"></div></li></ul><ul id="86dbb60e-b3c4-40f3-a1cc-3a20041ff481" class="to-do-list"><li><div class="checkbox checkbox-on"></div> <span class="to-do-children-checked">lecture 4 ?—name and -modes</span><div class="indented"></div></li></ul><ul id="5503f606-5ef6-4a98-a9ee-d2a1a4cb8da2" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">lecture 7</span><div class="indented"></div></li></ul><ul id="5f163aff-1b0b-4f9a-bb6c-4e8a74c15dfd" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">lecture 10</span><div class="indented"></div></li></ul><ul id="ff55385a-4a13-4ece-b288-d36fe45da53d" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">lecture 13</span><div class="indented"></div></li></ul><ul id="2df49b9d-14f3-469a-9023-d5eb9372d9d1" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">lecture 16</span><div class="indented"></div></li></ul><ul id="40d924c1-1ac6-4909-976e-c9f588c36354" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">lecture 19</span><div class="indented"></div></li></ul><p id="3ad962bc-e7db-4d7b-ac13-3c5c35da82ce" class="">
+</p></div><div id="0f2a259c-9950-4081-87eb-96b7e072952b" style="width:33.33333333333333%" class="column"><ul id="ec8e827d-a73d-4ad1-821c-f0d5ce2916d9" class="to-do-list"><li><div class="checkbox checkbox-on"></div> <span class="to-do-children-checked">lecture 2</span><div class="indented"></div></li></ul><ul id="40b8a270-bfb6-4902-ac77-18103e77ffe6" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">lecture 5</span><div class="indented"></div></li></ul><ul id="351cec98-9322-46d1-8309-8b311a8d638e" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">lecture 8</span><div class="indented"></div></li></ul><ul id="b3173a8a-e61e-4564-9cda-80a6d45cb312" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">lecture 11</span><div class="indented"></div></li></ul><ul id="ab23b9ba-1544-4ed7-ac5c-e24faa48ee03" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">lecture 14</span><div class="indented"></div></li></ul><ul id="d8204ca2-9e57-47d3-8e79-5ad4c15d9f8b" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">lecture 17</span><div class="indented"></div></li></ul><ul id="b3cb792c-9a8d-4fac-84f0-f3fd3ca5433f" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">lecture 20</span><div class="indented"></div></li></ul></div><div id="e86a9027-9e9c-401c-9e35-c9ed8836b4cf" style="width:29.16666666666664%" class="column"><ul id="c244a9d4-cfe2-4281-804e-f82383e8df24" class="to-do-list"><li><div class="checkbox checkbox-on"></div> <span class="to-do-children-checked">lecture 3</span><div class="indented"></div></li></ul><ul id="0d8c9d0e-bc8d-42db-8cd4-eda9017ad32e" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">lecture 6</span><div class="indented"></div></li></ul><ul id="467303ea-d246-4e5b-8e99-9ae5e3169855" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">lecture 9</span><div class="indented"></div></li></ul><ul id="e748cec5-26dc-48ba-9e7a-5f9a2deee10e" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">lecture 12</span><div class="indented"></div></li></ul><ul id="e2e63a25-4c81-427b-a7dd-60a83980b4eb" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">lecture 15</span><div class="indented"></div></li></ul><ul id="d47f6178-e52f-4555-a147-f447bd8fa21c" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">lecture 18</span><div class="indented"></div></li></ul><p id="3ce40cf1-ce42-46e7-87fd-1276464ed365" class="">
+</p></div></div><p id="a921aed7-fffe-4d3d-a66b-4237d8d03b0a" class="">1. Docker Notes: Docker &amp; Kubernetes (4 weeks)</p><div><nav id="9f08c33f-9820-4eba-9214-9524ee96123e" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#12b6a072-6d19-4fe9-99e4-0c477cc47d38">1. Docker Introduction:</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#588e780d-9377-42bf-8c8b-34d0af8598bc">a. AWS Servers:</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#2b5d05ef-803f-47f3-b6f6-0d5beee5d1c8">1. Connecting to AWS Server:</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#de1e9661-efe8-4bb8-937b-c7604c271962">b. Docker ARK:</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#350fbb00-9992-4885-a62b-7ae5c30cf2d8">c. Docker Lifecycle:</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#604e9887-49de-450b-9bc3-1ce2bfac14e2">c. Docker Modes:</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#9d8220be-5f04-48c6-b85e-66540fe96330">1. <mark class="highlight-teal_background"><span style="border-bottom:0.05em solid"><strong>Docker Attach: Without the </strong></span></mark><mark class="highlight-teal_background"><span style="border-bottom:0.05em solid"><strong><code>-d</code></strong></span></mark><mark class="highlight-teal_background"><span style="border-bottom:0.05em solid"><strong> flag</strong></span></mark><mark class="highlight-teal_background"> :</mark></a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#21a44fea-398e-466c-b990-9eb62cb0d334">2. <mark class="highlight-teal_background"><span style="border-bottom:0.05em solid"><strong>Docker Detach: With the </strong></span></mark><code><mark class="highlight-teal_background"><span style="border-bottom:0.05em solid"><strong>-d</strong></span></mark></code><mark class="highlight-teal_background"><span style="border-bottom:0.05em solid"><strong> flag,</strong></span></mark><mark class="highlight-teal_background"> </mark></a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#9ddd3a84-47be-44d9-8e58-bee3b07b1a4b">3. <mark class="highlight-teal_background"><span style="border-bottom:0.05em solid"><strong>Docker Interact: With the </strong></span></mark><mark class="highlight-teal_background"><span style="border-bottom:0.05em solid"><strong><code>it</code></strong></span></mark><mark class="highlight-teal_background"><span style="border-bottom:0.05em solid"><strong> flag:</strong></span></mark></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#87101ba7-1cb1-43a1-b050-51c089ea51e6">d. How Docker Containers Work:</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#885406d7-1028-405a-a499-7cf6a9e0b0ed">e. Port Forwarding:</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#60791755-5320-4c36-a163-a65f825a0791">2 Docker Commands 🚢</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#29034f9c-ed09-43e2-8a4d-a6256ac1c867">1. Get root User</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#a2d4e95e-e9c8-41a4-9c20-a3b639e25552">2. Get Update</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#6088125c-ec6c-47d0-8f58-739869460456">3. Get docker scripts</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#cc50f0d5-f306-415b-ba6d-182b7bd771af">4. Install the Docker Script</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#faceb1ef-14d1-42ce-97a8-8e15a20e05b1">5. Check Docker version</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#c3ba920b-3e02-4edc-94bb-011ea4b9d268">6. Docker Create Container</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#be865f3a-b058-4451-aa0f-d6bc2fcae573">7. Docker check Running Container</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#2e3560f8-4149-4de5-abdb-49e06cabc31f">8. Docker Check images</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#450fb1a3-20d8-4530-89c4-92320cb9ee86">9. Docker Delete The Container</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#65585cfe-3a3a-4d70-a474-f4c5e83ec78b">10. Docker delete the Image</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#cdad92f4-9048-44d1-a719-cee917a9fe18">11. Docker get All Container Id</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#b1d86050-76df-44a1-ba45-bf8f933a8656">12. Docker Get Images Id</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#6458b0e9-12ab-4ab8-a20f-5513a447bbf3">13. Docker Delete All the Container </a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#382b7464-f33d-4d1c-93eb-94801cad8f0f">14. Docker Delete All the Images </a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#f9b7b81a-3b9a-45ce-9099-59bc19b88e8c">15. Docker Check All The Details </a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#882f2977-dbae-44aa-adbd-1f045acf6fbb">16. Docker Search Image</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#b1412943-a4dd-41d2-a9f8-1caa96e19297">17. Docker Pull Images</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#8e0307c9-6118-462a-b813-7e498bd94546">18. Docker Stop Container</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#4fc5a026-8a68-4b4f-a53e-2463f86e8da4">19. Docker Check all the running Container</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#f0656885-ee5b-4c5f-87c7-1d12ba1cfb91">20. Docker Delete container.</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#7088447e-bb05-44fe-8001-2fe95a8df645">3. Image👍</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#44fb60a1-98c1-4744-8d81-e228ca6cd56b">Tomcat</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#d35d3300-24f9-4bbb-a519-9c79d8e476af">Deploy Java Application</a></div></nav></div><p id="da508459-f0e2-4272-b252-2b5123db6b14" class="">
+</p><h1 id="12b6a072-6d19-4fe9-99e4-0c477cc47d38" class="">1. Docker Introduction:</h1><ul id="371e316c-5995-44ae-bb56-d6e30a681734" class="bulleted-list"><li style="list-style-type:disc">Docker container is an isolated area used for deploying applications.</li></ul><ul id="99c82944-9d45-4fd5-89d5-5108ac41dc17" class="bulleted-list"><li style="list-style-type:disc">It allows for easy and cost-effective deployment with high performance.</li></ul><ul id="d3e06a96-ddc2-4a31-9e67-d1ccfee4e2fa" class="bulleted-list"><li style="list-style-type:disc">Docker containers are lightweight and efficient virtualization units.</li></ul><blockquote id="0c80aa19-743d-4751-aaaf-6fa3a4e55e32" class="">It is isolated area</blockquote><blockquote id="07321f5b-9126-4679-ab20-5b6453bd47f8" class="">It is For only deploying applications Very easily</blockquote><blockquote id="63f94424-c5ef-4aa5-9ee0-18208b698f30" class="">With low cast</blockquote><blockquote id="559e8ec0-cf61-444e-90c4-32f7332f8c05" class="">With high performance</blockquote><figure id="38b81565-0b13-404f-b1e0-6cba75bf3928" class="image"><a href="01-DOCKER%20cdcc7fe9b9444942ad5bade4d22edd14/Untitled.png"><img style="width:1095px" src="01-DOCKER%20cdcc7fe9b9444942ad5bade4d22edd14/Untitled.png"/></a></figure><h2 id="588e780d-9377-42bf-8c8b-34d0af8598bc" class="">a. AWS Servers:</h2><ul id="80328029-323a-4b2f-91d1-deb1dcb56f4c" class="toggle"><li><details open=""><summary><mark class="highlight-brown_background"><strong>To create an AWS server, follow these steps:</strong></mark></summary><ol type="1" id="575df6ee-da2e-49db-8b96-85435d0e3588" class="numbered-list" start="1"><li>Create an <strong>AWS account</strong> and <strong>log in.</strong></li></ol><ol type="1" id="9e672eb9-0962-414a-be69-0e94d3c08f95" class="numbered-list" start="2"><li>Choose the <strong>EC2 service</strong>.</li></ol><ol type="1" id="5efd0d53-82ba-4acb-add6-17fed7b515ba" class="numbered-list" start="3"><li>Configure the instance details, such as the <strong>instance count</strong> and type (e.g., <strong>t2.micro</strong>).</li></ol><ol type="1" id="4d441217-359c-420c-b698-ff700ce2c969" class="numbered-list" start="4"><li>Select an <strong>Ubuntu Linux AMI </strong><mark class="highlight-purple"><strong>(Amazon Machine Image)</strong></mark> as the operating system.</li></ol><ol type="1" id="154af611-b912-4804-ab2b-2f21b4cadbf3" class="numbered-list" start="5"><li>Configure security settings, including SSH and HTTP access.</li></ol><ol type="1" id="c9290975-4567-41e6-a746-49ed6e44978d" class="numbered-list" start="6"><li>Choose an EBS root volume for storage.</li></ol><ol type="1" id="6bc5abbd-9590-4b51-81bd-74ac79f1c79c" class="numbered-list" start="7"><li>Launch the instance to create the server.</li></ol><figure id="de857931-d924-4d0b-8f16-565570dade6e" class="image"><a href="01-DOCKER%20cdcc7fe9b9444942ad5bade4d22edd14/Untitled%201.png"><img style="width:578px" src="01-DOCKER%20cdcc7fe9b9444942ad5bade4d22edd14/Untitled%201.png"/></a></figure></details></li></ul><figure id="f67228ff-3167-4309-ba5f-6d3fb794ac2e" class="image"><a href="01-DOCKER%20cdcc7fe9b9444942ad5bade4d22edd14/Untitled%202.png"><img style="width:903px" src="01-DOCKER%20cdcc7fe9b9444942ad5bade4d22edd14/Untitled%202.png"/></a></figure><h3 id="2b5d05ef-803f-47f3-b6f6-0d5beee5d1c8" class="">1. Connecting to AWS Server:</h3><p id="e8852e14-2e42-4e48-962e-615ddb379466" class="">How to connect to aws server?</p><ol type="1" id="60d785a3-f736-4705-85da-2eef5114a94e" class="numbered-list" start="1"><li>Install git on laptop</li></ol><ol type="1" id="ecdbf53d-2625-4577-923d-448144718aa8" class="numbered-list" start="2"><li>By using git bash , pem file we can connect</li></ol><p id="60810c45-a70c-41ac-a874-c9c2f68b4215" class=""><code>$ sudo -i</code></p><blockquote id="3b9397e8-417b-4eea-89f0-ee7e384ff58b" class=""><mark class="highlight-gray">switch to Root user</mark></blockquote><p id="ef45dc09-d808-4a30-9ba1-0ddcd7dba187" class=""><code>#apt-get update</code></p><blockquote id="15d6a3b5-2ef0-41f4-a2ae-8aeadfadb952" class=""><mark class="highlight-gray">To Get Update{ Initially we have to do this}</mark></blockquote><p id="6a10d8ac-2680-4ea1-97fb-1c3d74b0127e" class=""><code>#curl -fsSL </code><code><a href="https://get.docker.com/">https://get.docker.com</a></code><code> -o </code><code><a href="http://install-docker.sh/">install-docker.sh</a></code></p><blockquote id="ca016bd6-5177-47da-bc07-777389eb410b" class=""><mark class="highlight-gray">To Get Docker install Script on our Linux Machine</mark></blockquote><p id="99e5e230-bfa0-4d6a-bbac-dc06b0b36e5e" class=""><code>#sudo sh </code><code><a href="http://install-docker.sh/">install-docker.sh</a></code></p><blockquote id="1cc6ff20-de8d-4473-9be8-5d134f5a21ae" class=""><mark class="highlight-gray">We have to Run this script to install docker on linux</mark></blockquote><p id="19f2e6f9-7ed3-4a4d-b535-523d5fe3c1b9" class=""><mark class="highlight-red_background">WE NEED TO CHECK IF DOCKER IS INSTALLED</mark></p><p id="8a8f34a8-38cd-4c7d-9466-af5922f97d43" class=""><code>#docker --version</code></p><blockquote id="e1214fac-774a-414a-98fe-0561d8755c1f" class=""><mark class="highlight-gray">To check Docker Version</mark></blockquote><p id="5c863fc4-e531-4886-9b66-52d65105b95e" class=""><code>#docker run --name myc1 -d -p 8081:80 nginx</code></p><blockquote id="710e94a1-4e9f-4a9b-9e08-f99e4d619b9a" class=""><mark class="highlight-gray">Docker run = search image + download image + create container</mark></blockquote><pre id="ac20c5b0-bdf7-4c04-b225-dcd3f9bbd1c7" class="code code-wrap"><code>1. This Command will Search image first in local registry, means in docker deamon, then if not found it will search on docker hub registry
+2. Download image 
+3. And create Container</code></pre><p id="5534b0c7-4d38-452d-a842-247c8e3e69f8" class=""><code>#docker ps</code></p><blockquote id="4c7ae712-3f2f-4a76-b17f-d5bc5aa7b8f0" class=""><mark class="highlight-gray">Docker ps is for checking running containers</mark></blockquote><p id="5cf0114a-67dc-4acc-b4e5-9decc245db14" class=""><code>#docker images</code></p><blockquote id="1db3fe31-bcfe-4506-80f3-77381811e5a4" class=""><mark class="highlight-gray">Docker images is for checking the available images in local registry</mark></blockquote><p id="52c94fa5-f39a-406e-b077-7eec777a25a4" class=""><code>#docker rm &lt;container name/container id&gt; -f</code></p><blockquote id="e70e9fc6-d85f-4523-ab25-517e00700a76" class=""><mark class="highlight-gray">docker rm delete the container and -f here is used to forcefully delete.</mark></blockquote><p id="36667b81-00a4-4198-9d9e-a3c35df10a09" class=""><code>#docker rmi &lt;image name/ image id&gt;</code></p><blockquote id="0cb9a923-9260-466e-b086-5dac8a70771d" class=""><mark class="highlight-gray"><mark class="highlight-gray"><mark class="highlight-gray"><mark class="highlight-gray"><mark class="highlight-gray"><mark class="highlight-gray"><mark class="highlight-gray"><mark class="highlight-gray"><mark class="highlight-gray"><mark class="highlight-gray"><mark class="highlight-gray">Docker RMI delete the image from local Repository</mark></mark></mark></mark></mark></mark></mark></mark></mark></mark></mark></blockquote><p id="e20ce8a1-1d91-49ca-a1ed-98a4dd8ec704" class=""><code>#docker ps -a -q</code></p><blockquote id="47052e4a-85c6-4509-aa27-197a24f596a5" class=""><mark class="highlight-gray"><mark class="highlight-gray"><mark class="highlight-gray"><mark class="highlight-gray"><mark class="highlight-gray"><mark class="highlight-gray"><mark class="highlight-gray"><mark class="highlight-gray"><mark class="highlight-gray"><mark class="highlight-gray"><mark class="highlight-gray"><mark class="highlight-gray"><mark class="highlight-gray"><mark class="highlight-gray">docker ps -a -q is for getting all docker container with there container id.</mark></mark></mark></mark></mark></mark></mark></mark></mark></mark></mark></mark></mark></mark></blockquote><pre id="011047c1-f47a-4e9c-874a-c49f227ca85a" class="code code-wrap"><code>1. -a={&quot;this is used to get all images.&quot;}
+2. -q={&quot;this is used to get container id from container list&quot;}</code></pre><p id="d4d29e78-72ea-4876-a684-4c74732fa26c" class=""><code>#docker images -q</code></p><blockquote id="71ef67d7-281c-42d1-a693-1f41d84560c9" class=""><mark class="highlight-gray"><mark class="highlight-gray"><mark class="highlight-gray"><mark class="highlight-gray"><mark class="highlight-gray"><mark class="highlight-gray"><mark class="highlight-gray"><mark class="highlight-gray"><mark class="highlight-gray"><mark class="highlight-gray">Docker images -q is used to get image id from images list</mark></mark></mark></mark></mark></mark></mark></mark></mark></mark></blockquote><p id="4182e73b-c67e-41b8-80a3-2dfddf0eadaf" class=""><code>#docker rm $(docker ps -a -q) -f</code></p><blockquote id="a64c0dff-366d-47e7-abdb-da903e3a2660" class="">this command is used to delete all the docker container at once</blockquote><p id="84c54077-362f-4027-8b17-678f55c8fe00" class=""><code>#docker rmi $(docker images -q)</code></p><blockquote id="c5e38ffa-36c8-46cc-9979-9c2289f42d90" class="">this command is used to delete all the docker images at once</blockquote><p id="89fc29af-e826-42fa-9701-e946da88ae83" class="">
+</p><p id="d16b8d15-19f3-4d9c-b372-06365270dfba" class=""><code>#docker inspect &lt;container_name_or_id&gt;</code></p><blockquote id="193b71f7-cb64-415c-b85e-c3dd3f2dd563" class="">The <code><strong>docker inspect</strong></code> command is used to obtain detailed information about a specific Docker container. It provides a comprehensive <code>JSON representation</code> of the container&#x27;s configuration and runtime details</blockquote><p id="4fc0e40b-8665-4918-a65a-9c64d2a895d6" class=""><code># docker search &lt;image name&gt;</code></p><blockquote id="c9eb5165-9c57-45a3-a9a0-2664affe4df6" class="">The <code><strong>docker search</strong></code> command is used to search for Docker images available in the Docker Hub registry or any other container registry specified in your Docker configuration.</blockquote><p id="dfaecab5-2efc-4000-bc3b-58695b06686b" class=""><code># docker pull &lt;image name&gt;</code></p><blockquote id="ce38075c-0b3c-4ad1-bbc5-d516836b6ee6" class="">The <code><strong>docker pull</strong></code> command is used to download Docker images from a container registry, such as Docker Hub, to your local system.</blockquote><p id="597ce3a4-1fb4-455b-ae57-0519dca675c2" class=""><code>#docker stop &lt;container name/ id&gt;</code></p><blockquote id="e598b2ab-1581-49fe-bf6a-30344ba17301" class="">The <code><strong>docker stop</strong></code> command is used to gracefully stop a running Docker container.</blockquote><p id="b0cea69c-2116-41c1-bd0f-1802793e2f61" class="">
+</p><p id="ccc4fee7-ed19-4005-a3e9-0af1e95bdc47" class=""><code>#docker ps -a</code></p><blockquote id="2cd0d2e0-8249-4e7c-9b7b-2a8726a6914f" class="">The <code><strong>docker ps</strong></code> command is used to display information about the running containers on your system. However, when you add the <code><strong>-a</strong></code> (or <code><strong>--all</strong></code>) flag, it shows information about all containers, including both running and stopped ones. This command is useful for checking the status of containers, viewing container details, and identifying stopped containers that you may want to remove.</blockquote><p id="d157b161-0572-46d4-9257-7421e71c2118" class=""><code>#docker rm &lt;container name/ id&gt;</code></p><blockquote id="c21fedb1-451e-4d24-8e04-fc9f7356af59" class="">The <code><strong>docker rm</strong></code> command is used to remove one or more stopped Docker containers from your system. When you stop a container using <code><strong>docker stop</strong></code>, it remains on your system as a stopped container until you explicitly remove it with <code><strong>docker rm</strong></code>.</blockquote><p id="b0f316cb-e6fb-40e5-b129-dde4c9f38a54" class="">
+</p><blockquote id="1be3f0cc-a8fe-47d1-abde-014e1d0d37fb" class=""><code>Docker run = search image + download image + create container</code></blockquote><h2 id="de1e9661-efe8-4bb8-937b-c7604c271962" class="">b. Docker ARK:</h2><figure id="e125c60e-b58f-48cf-9b22-829d393186b1" class="image"><a href="01-DOCKER%20cdcc7fe9b9444942ad5bade4d22edd14/Untitled%203.png"><img style="width:993px" src="01-DOCKER%20cdcc7fe9b9444942ad5bade4d22edd14/Untitled%203.png"/></a></figure><p id="dead3772-0f70-4a6f-a768-dd96f0263163" class=""><mark class="highlight-teal_background">Docker run itself is docker client</mark></p><p id="8d84eb2e-8e3d-42fc-9ac3-d1842d7178bb" class=""><mark class="highlight-teal_background">Docker App is Docker Demon</mark></p><p id="19573412-2bf6-4e7d-8c39-53c1782d1a2e" class=""><mark class="highlight-teal_background">Docker Hub is Docker Registry</mark></p><h2 id="350fbb00-9992-4885-a62b-7ae5c30cf2d8" class="">c. Docker Lifecycle:</h2><ul id="c0537e57-4111-4732-ae16-ad0c17ece682" class="bulleted-list"><li style="list-style-type:disc">The Docker container lifecycle involves several stages, including creating, starting, stopping, and removing containers.</li></ul><blockquote id="c1fa2ab2-4359-4a0e-8e24-08aede35b8bb" class=""><mark class="highlight-yellow_background">Before deleting we should stop docker container.</mark></blockquote><ul id="649059c0-41c2-45fa-9cd0-13c103c8e08d" class="bulleted-list"><li style="list-style-type:disc">To stop docker container use <code>docker stop &lt;container_id/container_name&gt;</code></li></ul><ul id="3aa5eb93-8bfe-4343-98e9-c5917cbc0f99" class="bulleted-list"><li style="list-style-type:disc">to check if it stopped use <code>docker ps</code> which shows only running container</li></ul><ul id="6db7c9df-4445-42b2-a632-f563265003f4" class="bulleted-list"><li style="list-style-type:disc">&lt;to check stopped container user <code>docker ps -a {which shows all the containers}</code>&gt;</li></ul><p id="32b70694-054b-44f1-b77c-e1a6580dd0e0" class="">
+</p><figure id="2f860ee6-94d3-4ac2-bc66-87517baa52d1" class="image"><a href="01-DOCKER%20cdcc7fe9b9444942ad5bade4d22edd14/Untitled%204.png"><img style="width:1006px" src="01-DOCKER%20cdcc7fe9b9444942ad5bade4d22edd14/Untitled%204.png"/></a></figure><h2 id="604e9887-49de-450b-9bc3-1ce2bfac14e2" class="">c. Docker Modes:</h2><h3 id="9d8220be-5f04-48c6-b85e-66540fe96330" class="">1. <mark class="highlight-teal_background"><span style="border-bottom:0.05em solid"><strong>Docker Attach: Without the </strong></span></mark><mark class="highlight-teal_background"><span style="border-bottom:0.05em solid"><strong><code>-d</code></strong></span></mark><mark class="highlight-teal_background"><span style="border-bottom:0.05em solid"><strong> flag</strong></span></mark><mark class="highlight-teal_background"> :</mark></h3><p id="e69ddc64-5aa1-42ce-b203-c708e6ce4afc" class="">When creating the container, container is attached to the terminal. When the terminal is closed, the container automatically stops.
+Example: <code>docker run nginx</code></p><h3 id="21a44fea-398e-466c-b990-9eb62cb0d334" class="">2. <mark class="highlight-teal_background"><span style="border-bottom:0.05em solid"><strong>Docker Detach: With the </strong></span></mark><code><mark class="highlight-teal_background"><span style="border-bottom:0.05em solid"><strong>-d</strong></span></mark></code><mark class="highlight-teal_background"><span style="border-bottom:0.05em solid"><strong> flag,</strong></span></mark><mark class="highlight-teal_background"> </mark></h3><p id="11559f10-3f48-4ef8-b472-93dbe6500479" class="">When creating the container, container is detached from the terminal, and it continues running even when the terminal is closed.
+Example: <code>docker run -d nginx</code></p><h3 id="9ddd3a84-47be-44d9-8e58-bee3b07b1a4b" class="">3. <mark class="highlight-teal_background"><span style="border-bottom:0.05em solid"><strong>Docker Interact: With the </strong></span></mark><mark class="highlight-teal_background"><span style="border-bottom:0.05em solid"><strong><code>it</code></strong></span></mark><mark class="highlight-teal_background"><span style="border-bottom:0.05em solid"><strong> flag:</strong></span></mark></h3><p id="8a0b7805-e492-45fb-aa72-79854a658127" class="">After creation of the container, by using interact mode , we can get into the
+container.</p><p id="a0df9b57-87c5-488f-90c7-c6bf4803881c" class="">Example: <code>docker exec -it &lt;container name&gt; /bin/bash</code></p><h2 id="87101ba7-1cb1-43a1-b050-51c089ea51e6" class="">d. How Docker Containers Work:</h2><ul id="8af6f55a-8046-4010-853f-2fada0a4dea8" class="bulleted-list"><li style="list-style-type:disc">Docker containers run on top of the host OS, using shared kernel features to achieve isolation.</li></ul><ul id="01dcf83f-aeb3-4099-9e58-e6fff6215b53" class="bulleted-list"><li style="list-style-type:disc">They are built from images that contain the application and its dependencies.</li></ul><ul id="63d439d1-b378-4015-9285-c78acab87623" class="bulleted-list"><li style="list-style-type:disc">Docker containers are portable and can be easily moved and executed on different systems.</li></ul><h2 id="885406d7-1028-405a-a499-7cf6a9e0b0ed" class="">e. Port Forwarding:</h2><ul id="dfe206f5-7c0f-4418-a3f8-0afd16849f23" class="bulleted-list"><li style="list-style-type:disc">Port forwarding, specified using the <code>p</code> flag in <code>docker run</code>, allows mapping ports between the host and the container.</li></ul><ul id="fa8e5144-f7e2-42d7-bd31-eb68fac48e92" class="bulleted-list"><li style="list-style-type:disc">For example, <code>docker run -p 8081:80 nginx</code> maps port 80 of the container to port 8081 on the host. This allows accessing the web server running inside the container from the internet.</li></ul><h1 id="60791755-5320-4c36-a163-a65f825a0791" class="">2 Docker Commands 🚢</h1><h3 id="29034f9c-ed09-43e2-8a4d-a6256ac1c867" class="">1. Get root User</h3><p id="671cb39c-67e1-4ec6-9222-196ce96d1d48" class=""><code>$ sudo -i</code></p><blockquote id="3831d11a-7be8-41ad-950b-86e0f92e1cde" class=""><mark class="highlight-gray">switch to Root user</mark></blockquote><h3 id="a2d4e95e-e9c8-41a4-9c20-a3b639e25552" class="">2. Get Update</h3><p id="49aa84c6-f7de-4781-92ed-da56e46c4d43" class=""><code>#apt-get update</code></p><blockquote id="85cc1a56-a02f-404d-b551-2374e9c67b4e" class=""><mark class="highlight-gray">To Get Update{ Initially we have to do this}</mark></blockquote><h3 id="6088125c-ec6c-47d0-8f58-739869460456" class="">3. Get docker scripts</h3><p id="23f4a8b0-a383-45d4-b584-fabcf8982bb4" class=""><code>#curl -fsSL </code><code><a href="https://get.docker.com/">https://get.docker.com</a></code><code> -o </code><code><a href="http://install-docker.sh/">install-docker.sh</a></code></p><blockquote id="17148505-3d79-4231-8220-21e4ddbc9f1e" class=""><mark class="highlight-gray">To Get Docker install Script on our Linux Machine</mark></blockquote><h3 id="cc50f0d5-f306-415b-ba6d-182b7bd771af" class="">4. Install the Docker Script</h3><p id="ce7ecac6-ce6b-462d-a363-c47a0e4df30c" class=""><code>#sudo sh </code><code><a href="http://install-docker.sh/">install-docker.sh</a></code></p><blockquote id="c4726bd4-5f47-4a9c-9666-cdb1d3db9145" class=""><mark class="highlight-gray">We have to Run this script to install docker on linux</mark></blockquote><h3 id="faceb1ef-14d1-42ce-97a8-8e15a20e05b1" class="">5. Check Docker version</h3><p id="76b45b83-64ff-4b94-8560-cb91d2cedf64" class=""><code>#docker --version</code></p><blockquote id="9bbeb5f1-c835-4a9b-9297-fb673f2833e1" class=""><mark class="highlight-gray">To check Docker Version</mark></blockquote><h3 id="c3ba920b-3e02-4edc-94bb-011ea4b9d268" class="">6. Docker Create Container</h3><p id="482f1a02-46f6-4472-9f90-d352195bec84" class=""><code>#docker run --name myc1 -d -p 8081:80 nginx</code></p><blockquote id="f75e1bfb-0a14-42a0-a14b-3dc875df0585" class=""><mark class="highlight-gray">Docker run = search image + download image + create container</mark></blockquote><pre id="a00f27eb-811c-4352-a9f3-4e1c4f37853d" class="code code-wrap"><code>1. This Command will Search image first in local registry, means in docker deamon, then if not found it will search on docker hub registry
+2. Download image 
+3. And create Container</code></pre><h3 id="be865f3a-b058-4451-aa0f-d6bc2fcae573" class="">7. Docker check Running Container</h3><p id="5de6109d-178d-45f5-84c0-45e3459880ca" class=""><code>#docker ps</code></p><blockquote id="f48d5784-e17a-4df3-88da-89e2a34f253a" class=""><mark class="highlight-gray">Docker ps is for checking running containers</mark></blockquote><h3 id="2e3560f8-4149-4de5-abdb-49e06cabc31f" class="">8. Docker Check images</h3><p id="9d2afe43-8334-432d-8fde-775fe469d79f" class=""><code>#docker images</code></p><blockquote id="173844ee-5fa8-423a-90e1-b548130359ed" class=""><mark class="highlight-gray">Docker images is for checking the available images in local registry</mark></blockquote><h3 id="450fb1a3-20d8-4530-89c4-92320cb9ee86" class="">9. Docker Delete The Container</h3><p id="a3420360-5f66-4e3a-a75f-efcb70b13b26" class=""><code>#docker rm &lt;container name/container id&gt; -f</code></p><blockquote id="d348d8eb-bef3-44ec-a522-7c366e3b7800" class=""><mark class="highlight-gray">docker rm delete the container and -f here is used to forcefully delete.</mark></blockquote><h3 id="65585cfe-3a3a-4d70-a474-f4c5e83ec78b" class="">10. Docker delete the Image</h3><p id="dc00ae50-a77d-4ec4-94c7-00523445d8e6" class=""><code>#docker rmi &lt;image name/ image id&gt;</code></p><blockquote id="ec3888c5-afc6-4179-99ce-be94d250fc5f" class=""><mark class="highlight-gray"><mark class="highlight-gray"><mark class="highlight-gray"><mark class="highlight-gray"><mark class="highlight-gray"><mark class="highlight-gray"><mark class="highlight-gray"><mark class="highlight-gray"><mark class="highlight-gray"><mark class="highlight-gray"><mark class="highlight-gray">Docker RMI delete the image from local Repository</mark></mark></mark></mark></mark></mark></mark></mark></mark></mark></mark></blockquote><h3 id="cdad92f4-9048-44d1-a719-cee917a9fe18" class="">11. Docker get All Container Id</h3><p id="deb0d76c-c5e1-4a1b-96a2-bbd25e2cbd9f" class=""><code>#docker ps -a -q</code></p><blockquote id="63b86a20-5b59-41bf-a01d-b0005b67bd7f" class=""><mark class="highlight-gray"><mark class="highlight-gray"><mark class="highlight-gray"><mark class="highlight-gray"><mark class="highlight-gray"><mark class="highlight-gray"><mark class="highlight-gray"><mark class="highlight-gray"><mark class="highlight-gray"><mark class="highlight-gray"><mark class="highlight-gray"><mark class="highlight-gray"><mark class="highlight-gray"><mark class="highlight-gray">docker ps -a -q is for getting all docker container with there container id.</mark></mark></mark></mark></mark></mark></mark></mark></mark></mark></mark></mark></mark></mark></blockquote><pre id="24e67e53-0b55-4eaa-b21f-ece80c614932" class="code code-wrap"><code>1. -a={&quot;this is used to get all images.&quot;}
+2. -q={&quot;this is used to get container id from container list&quot;}</code></pre><h3 id="b1d86050-76df-44a1-ba45-bf8f933a8656" class="">12. Docker Get Images Id</h3><p id="a1f00427-a033-4dff-8620-095121f1e0c3" class=""><code>#docker images -q</code></p><blockquote id="bb0d273c-8bd1-4ecb-aacb-dc8db385c6dd" class=""><mark class="highlight-gray"><mark class="highlight-gray"><mark class="highlight-gray"><mark class="highlight-gray"><mark class="highlight-gray"><mark class="highlight-gray"><mark class="highlight-gray"><mark class="highlight-gray"><mark class="highlight-gray"><mark class="highlight-gray">Docker images -q is used to get image id from images list</mark></mark></mark></mark></mark></mark></mark></mark></mark></mark></blockquote><h3 id="6458b0e9-12ab-4ab8-a20f-5513a447bbf3" class="">13. Docker Delete All the Container </h3><p id="e3015d64-587e-4e06-9da2-f3c391738195" class=""><code>#docker rm $(docker ps -a -q) -f</code></p><blockquote id="5d150d29-8f36-4e78-aa31-8f88d3cb7afe" class="">this command is used to delete all the docker container at once</blockquote><h3 id="382b7464-f33d-4d1c-93eb-94801cad8f0f" class="">14. Docker Delete All the Images </h3><p id="fa9c7519-e427-4ec7-8b1e-71070e1fdd93" class=""><code>#docker rmi $(docker images -q)</code></p><blockquote id="a26e4861-83db-4aff-982c-ad1d5fa8a2b5" class="">this command is used to delete all the docker images at once</blockquote><h3 id="f9b7b81a-3b9a-45ce-9099-59bc19b88e8c" class="">15. Docker Check All The Details </h3><p id="05caabec-abef-4db6-8e2b-9f8f60102135" class=""><code>#docker inspect &lt;container_name_or_id&gt;</code></p><blockquote id="a9e59d2a-d0bf-42a2-a892-05200769871f" class="">The <code><strong>docker inspect</strong></code> command is used to obtain detailed information about a specific Docker container. It provides a comprehensive <code>JSON representation</code> of the container&#x27;s configuration and runtime details</blockquote><h3 id="882f2977-dbae-44aa-adbd-1f045acf6fbb" class="">16. Docker Search Image</h3><p id="c9ea9bd8-47a5-4fe3-a0b4-037e4529928c" class=""><code># docker search &lt;image name&gt;</code></p><blockquote id="a5688269-a8fa-4806-b977-cf5cdf176def" class="">The <code><strong>docker search</strong></code> command is used to search for Docker images available in the Docker Hub registry or any other container registry specified in your Docker configuration.</blockquote><h3 id="b1412943-a4dd-41d2-a9f8-1caa96e19297" class="">17. Docker Pull Images</h3><p id="21d63edc-c62f-4049-9ccf-c452d455a933" class=""><code># docker pull &lt;image name&gt;</code></p><blockquote id="5d901560-55b4-4328-903c-262edd6160e4" class="">The <code><strong>docker pull</strong></code> command is used to download Docker images from a container registry, such as Docker Hub, to your local system.</blockquote><h3 id="8e0307c9-6118-462a-b813-7e498bd94546" class="">18. Docker Stop Container</h3><p id="54eb090e-45cb-4965-b69a-c66adf0b1382" class=""><code>#docker stop &lt;container name/ id&gt;</code></p><blockquote id="cbe81f76-9ec7-412b-a22e-dc61a32b3b36" class="">The <code><strong>docker stop</strong></code> command is used to gracefully stop a running Docker container.</blockquote><h3 id="4fc5a026-8a68-4b4f-a53e-2463f86e8da4" class="">19. Docker Check all the running Container</h3><p id="4ea0598c-a67c-43a7-8830-80c526586efb" class=""><code>#docker ps -a</code></p><blockquote id="7f369278-f472-4bd0-82c9-f36dc48941ae" class="">The <code><strong>docker ps</strong></code> command is used to display information about the running containers on your system. However, when you add the <code><strong>-a</strong></code> (or <code><strong>--all</strong></code>) flag, it shows information about all containers, including both running and stopped ones. This command is useful for checking the status of containers, viewing container details, and identifying stopped containers that you may want to remove.</blockquote><h3 id="f0656885-ee5b-4c5f-87c7-1d12ba1cfb91" class="">20. Docker Delete container.</h3><p id="1e911c62-b106-412d-a787-1e46b452d2a3" class=""><code>#docker rm &lt;container name/ id&gt;</code></p><blockquote id="cc4c6513-e1ac-4fbe-85f4-731b40de384b" class="">The <code><strong>docker rm</strong></code> command is used to remove one or more stopped Docker containers from your system. When you stop a container using <code><strong>docker stop</strong></code>, it remains on your system as a stopped container until you explicitly remove it with <code><strong>docker rm</strong></code>.</blockquote><p id="34319421-96fd-4fd2-9f0d-5702621a2798" class="">
+</p><blockquote id="7bf89250-1f63-49d4-a68d-eea0ff54e9b6" class=""><strong><code>Docker run = search image + download image + create container</code></strong></blockquote><p id="c6454c0c-72ab-4ed6-888d-79c6f0d55855" class="">
+</p><h1 id="7088447e-bb05-44fe-8001-2fe95a8df645" class="">3. Image👍</h1><ol type="1" id="3bae28c2-d747-4d64-bfd0-361ab2bbaea0" class="numbered-list" start="1"><li>create Image</li></ol><ol type="1" id="4a457d92-55d3-4975-81f8-6b4c2c25b85e" class="numbered-list" start="2"><li>Build Image</li></ol><ol type="1" id="dd8cb3c6-104e-4fde-97c8-c8f3b4f54b41" class="numbered-list" start="3"><li>Create Container</li></ol><p id="21b266c0-405f-46a1-9173-4efc693ec951" class="">{ Docker File is simple plain text format }</p><p id="2769924d-8258-492d-ab58-f0013c9d4b67" class="">
+</p><blockquote id="4d1a1078-da3f-4cda-b368-345c38c628fa" class="">1) Create Docker File name should be exactly <code>Dockerfile</code></blockquote><pre id="bb628515-2878-4b0b-8879-c21244f3d9cb" class="code code-wrap"><code>FROM ubuntu:22.04 // this is base image
+MAINTAINER pratap // this is optional
+RUN apt-get update // this run while image building
+CMD [&quot;echo&quot;,&quot;This is my First Container&quot;] // only this command executing container above three were executed while building </code></pre><blockquote id="250a1a51-6fe6-429e-886b-9d94f478e1ee" class="">2) Now Build Docker Image using a command</blockquote><p id="311c65f4-4183-406b-80c5-ff10bb5fe00a" class=""><code>docker build -t myImage:1</code></p><blockquote id="5b8bd247-5396-4d6a-9df7-0b1296be0a58" class="">3) Create Container</blockquote><p id="1f776595-8fd1-46b5-9371-3c76a3b55c8e" class=""><code>docker run myImage:1 </code></p><p id="81e5b937-23b0-4d1a-a2dc-fd0a3e2de917" class="">
+</p><h3 id="44fb60a1-98c1-4744-8d81-e228ca6cd56b" class="">Tomcat</h3><figure id="2dff7895-d5b7-427d-9922-3a7418cc3aa6" class="image"><a href="01-DOCKER%20cdcc7fe9b9444942ad5bade4d22edd14/Untitled%205.png"><img style="width:931px" src="01-DOCKER%20cdcc7fe9b9444942ad5bade4d22edd14/Untitled%205.png"/></a></figure><p id="b9ef0f7b-96b2-45d3-98b1-49b7ea9e69bc" class="">
+</p><h2 id="d35d3300-24f9-4bbb-a519-9c79d8e476af" class="">Deploy Java Application</h2><p id="1c7dc35a-493f-4645-956c-bbfe348db476" class="">#vi Dockerfile <code>{For Editing File}</code><div class="indented"><pre id="5508eee0-d1b2-4db7-a359-4122ff0eea65" class="code code-wrap"><code>FROM tomcat:8.5.37-jre8
+MAINTAINER maha
+RUN apt-get update
+COPY mahaLogin.war /usr/local/tomcat/webapps
+EXPOSE 8080
+CMD[”catalina.sh”, ”run”] </code></pre><p id="6a77c124-b398-471b-a8d7-bf189e6604c9" class="">
+</p></div></p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

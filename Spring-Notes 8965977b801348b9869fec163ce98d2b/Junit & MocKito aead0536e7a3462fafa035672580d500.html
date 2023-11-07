@@ -1,0 +1,1132 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Junit &amp; MocKito</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="aead0536-e7a3-462f-afa0-35672580d500" class="page sans"><header><img class="page-cover-image" src="Junit%20&amp;%20MocKito%20aead0536e7a3462fafa035672580d500/junit5.png" style="object-position:center 49.44%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">5️⃣</span></div><h1 class="page-title">Junit &amp; MocKito</h1><p class="page-description"></p><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg role="graphics-symbol" viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0" class="typesCreatedAt"><path d="M8 15.126C11.8623 15.126 15.0615 11.9336 15.0615 8.06445C15.0615 4.20215 11.8623 1.00293 7.99316 1.00293C4.13086 1.00293 0.938477 4.20215 0.938477 8.06445C0.938477 11.9336 4.1377 15.126 8 15.126ZM8 13.7383C4.85547 13.7383 2.33301 11.209 2.33301 8.06445C2.33301 4.91992 4.84863 2.39746 7.99316 2.39746C11.1377 2.39746 13.6738 4.91992 13.6738 8.06445C13.6738 11.209 11.1445 13.7383 8 13.7383ZM4.54102 8.91211H7.99316C8.30078 8.91211 8.54004 8.67285 8.54004 8.37207V3.8877C8.54004 3.58691 8.30078 3.34766 7.99316 3.34766C7.69238 3.34766 7.45312 3.58691 7.45312 3.8877V7.83203H4.54102C4.2334 7.83203 4.00098 8.06445 4.00098 8.37207C4.00098 8.67285 4.2334 8.91211 4.54102 8.91211Z"></path></svg></span>Created</th><td><time>@September 16, 2023 12:01 PM</time></td></tr><tr class="property-row property-row-date"><th><span class="icon property-icon"><svg role="graphics-symbol" viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0" class="typesDate"><path d="M3.29688 14.4561H12.7031C14.1797 14.4561 14.9453 13.6904 14.9453 12.2344V3.91504C14.9453 2.45215 14.1797 1.69336 12.7031 1.69336H3.29688C1.82031 1.69336 1.05469 2.45215 1.05469 3.91504V12.2344C1.05469 13.6973 1.82031 14.4561 3.29688 14.4561ZM3.27637 13.1162C2.70898 13.1162 2.39453 12.8154 2.39453 12.2207V5.9043C2.39453 5.30273 2.70898 5.00879 3.27637 5.00879H12.71C13.2842 5.00879 13.6055 5.30273 13.6055 5.9043V12.2207C13.6055 12.8154 13.2842 13.1162 12.71 13.1162H3.27637ZM6.68066 7.38086H7.08398C7.33008 7.38086 7.41211 7.30566 7.41211 7.05957V6.66309C7.41211 6.41699 7.33008 6.3418 7.08398 6.3418H6.68066C6.44141 6.3418 6.35938 6.41699 6.35938 6.66309V7.05957C6.35938 7.30566 6.44141 7.38086 6.68066 7.38086ZM8.92285 7.38086H9.31934C9.56543 7.38086 9.64746 7.30566 9.64746 7.05957V6.66309C9.64746 6.41699 9.56543 6.3418 9.31934 6.3418H8.92285C8.67676 6.3418 8.59473 6.41699 8.59473 6.66309V7.05957C8.59473 7.30566 8.67676 7.38086 8.92285 7.38086ZM11.1582 7.38086H11.5547C11.8008 7.38086 11.8828 7.30566 11.8828 7.05957V6.66309C11.8828 6.41699 11.8008 6.3418 11.5547 6.3418H11.1582C10.9121 6.3418 10.8301 6.41699 10.8301 6.66309V7.05957C10.8301 7.30566 10.9121 7.38086 11.1582 7.38086ZM4.44531 9.58203H4.84863C5.09473 9.58203 5.17676 9.50684 5.17676 9.26074V8.86426C5.17676 8.61816 5.09473 8.54297 4.84863 8.54297H4.44531C4.20605 8.54297 4.12402 8.61816 4.12402 8.86426V9.26074C4.12402 9.50684 4.20605 9.58203 4.44531 9.58203ZM6.68066 9.58203H7.08398C7.33008 9.58203 7.41211 9.50684 7.41211 9.26074V8.86426C7.41211 8.61816 7.33008 8.54297 7.08398 8.54297H6.68066C6.44141 8.54297 6.35938 8.61816 6.35938 8.86426V9.26074C6.35938 9.50684 6.44141 9.58203 6.68066 9.58203ZM8.92285 9.58203H9.31934C9.56543 9.58203 9.64746 9.50684 9.64746 9.26074V8.86426C9.64746 8.61816 9.56543 8.54297 9.31934 8.54297H8.92285C8.67676 8.54297 8.59473 8.61816 8.59473 8.86426V9.26074C8.59473 9.50684 8.67676 9.58203 8.92285 9.58203ZM11.1582 9.58203H11.5547C11.8008 9.58203 11.8828 9.50684 11.8828 9.26074V8.86426C11.8828 8.61816 11.8008 8.54297 11.5547 8.54297H11.1582C10.9121 8.54297 10.8301 8.61816 10.8301 8.86426V9.26074C10.8301 9.50684 10.9121 9.58203 11.1582 9.58203ZM4.44531 11.7832H4.84863C5.09473 11.7832 5.17676 11.708 5.17676 11.4619V11.0654C5.17676 10.8193 5.09473 10.7441 4.84863 10.7441H4.44531C4.20605 10.7441 4.12402 10.8193 4.12402 11.0654V11.4619C4.12402 11.708 4.20605 11.7832 4.44531 11.7832ZM6.68066 11.7832H7.08398C7.33008 11.7832 7.41211 11.708 7.41211 11.4619V11.0654C7.41211 10.8193 7.33008 10.7441 7.08398 10.7441H6.68066C6.44141 10.7441 6.35938 10.8193 6.35938 11.0654V11.4619C6.35938 11.708 6.44141 11.7832 6.68066 11.7832ZM8.92285 11.7832H9.31934C9.56543 11.7832 9.64746 11.708 9.64746 11.4619V11.0654C9.64746 10.8193 9.56543 10.7441 9.31934 10.7441H8.92285C8.67676 10.7441 8.59473 10.8193 8.59473 11.0654V11.4619C8.59473 11.708 8.67676 11.7832 8.92285 11.7832Z"></path></svg></span>Date</th><td><time>@September 16, 2023</time></td></tr><tr class="property-row property-row-select"><th><span class="icon property-icon"><svg role="graphics-symbol" viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0" class="typesSelect"><path d="M8 15.126C11.8623 15.126 15.0615 11.9336 15.0615 8.06445C15.0615 4.20215 11.8623 1.00293 7.99316 1.00293C4.13086 1.00293 0.938477 4.20215 0.938477 8.06445C0.938477 11.9336 4.1377 15.126 8 15.126ZM8 13.7383C4.85547 13.7383 2.33301 11.209 2.33301 8.06445C2.33301 4.91992 4.84863 2.39746 7.99316 2.39746C11.1377 2.39746 13.6738 4.91992 13.6738 8.06445C13.6738 11.209 11.1445 13.7383 8 13.7383ZM7.62402 10.6348C7.79492 10.915 8.20508 10.9287 8.37598 10.6348L10.666 6.73145C10.8574 6.41016 10.7002 6.04102 10.3652 6.04102H5.62793C5.29297 6.04102 5.14941 6.43066 5.32031 6.73145L7.62402 10.6348Z"></path></svg></span>Select</th><td><span class="selected-value select-value-color-orange">Junit</span></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg role="graphics-symbol" viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0" class="typesMultipleSelect"><path d="M1.91602 4.83789C2.44238 4.83789 2.87305 4.40723 2.87305 3.87402C2.87305 3.34766 2.44238 2.91699 1.91602 2.91699C1.38281 2.91699 0.952148 3.34766 0.952148 3.87402C0.952148 4.40723 1.38281 4.83789 1.91602 4.83789ZM5.1084 4.52344H14.3984C14.7607 4.52344 15.0479 4.23633 15.0479 3.87402C15.0479 3.51172 14.7607 3.22461 14.3984 3.22461H5.1084C4.74609 3.22461 4.45898 3.51172 4.45898 3.87402C4.45898 4.23633 4.74609 4.52344 5.1084 4.52344ZM1.91602 9.03516C2.44238 9.03516 2.87305 8.60449 2.87305 8.07129C2.87305 7.54492 2.44238 7.11426 1.91602 7.11426C1.38281 7.11426 0.952148 7.54492 0.952148 8.07129C0.952148 8.60449 1.38281 9.03516 1.91602 9.03516ZM5.1084 8.7207H14.3984C14.7607 8.7207 15.0479 8.43359 15.0479 8.07129C15.0479 7.70898 14.7607 7.42188 14.3984 7.42188H5.1084C4.74609 7.42188 4.45898 7.70898 4.45898 8.07129C4.45898 8.43359 4.74609 8.7207 5.1084 8.7207ZM1.91602 13.2324C2.44238 13.2324 2.87305 12.8018 2.87305 12.2686C2.87305 11.7422 2.44238 11.3115 1.91602 11.3115C1.38281 11.3115 0.952148 11.7422 0.952148 12.2686C0.952148 12.8018 1.38281 13.2324 1.91602 13.2324ZM5.1084 12.918H14.3984C14.7607 12.918 15.0479 12.6309 15.0479 12.2686C15.0479 11.9062 14.7607 11.6191 14.3984 11.6191H5.1084C4.74609 11.6191 4.45898 11.9062 4.45898 12.2686C4.45898 12.6309 4.74609 12.918 5.1084 12.918Z"></path></svg></span>Tags</th><td><span class="selected-value select-value-color-purple">Daily</span><span class="selected-value select-value-color-default">Ramesh Fadtare</span></td></tr></tbody></table></header><div class="page-body"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="887343e8-da3f-4d10-93f9-e6443351527d"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Here that header index will Come</div></figure><p id="bc08afe8-89c1-4562-aed3-5024026ae869" class="">
+</p><div><nav id="4c8c8109-7752-4eb2-9c75-91e7554f7685" class="block-color-gray table_of_contents"></nav></div><p id="551f4256-41c0-477f-9de2-ce3a4b5039a0" class="">
+</p><h1 id="c3f9a57f-7901-4fe0-9c4f-e21de86e87db" class="block-color-gray_background">Section 1: Hello Junit..!</h1><figure id="f464857d-105d-497a-a538-2af85310ec95" class="image"><a href="Junit%20&amp;%20MocKito%20aead0536e7a3462fafa035672580d500/Untitled.png"><img style="width:834px" src="Junit%20&amp;%20MocKito%20aead0536e7a3462fafa035672580d500/Untitled.png"/></a></figure><p id="ada8cb52-3c9e-4b2b-a3c3-64061f8a58ba" class="">
+</p><div id="58ad3a12-5463-41fe-92f9-8898ccb783c3" class="column-list"><div id="90750f72-d0f9-47ad-8819-27a7192163c5" style="width:50%" class="column"><h1 id="824f262c-ee1e-4dd0-8930-269879bd67eb" class="">Section 2: AssertJ Overview:</h1><ol type="1" id="bef8fd53-9677-448b-96b9-38b91fba635c" class="numbered-list" start="1"><li>AssertJ is a Java library that provides a rich set of assertions and truly
+helpful error messages, improves test code readability, and is designed to
+be super easy to use within your favorite IDE.</li></ol><ol type="1" id="6bbc710b-30ae-4fde-919c-1c181b03d796" class="numbered-list" start="2"><li>When we want to write assertions with AssertJ, we have to use the static
+<code>assertThat()</code> method of the <code>org.assertj.core.api.Assertions class.
+AssertJ</code> Overview</li></ol><ol type="1" id="b903bae8-c918-4db4-8b1e-7ba8b45deaa1" class="numbered-list" start="3"><li>Spring boot starter test dependency internally provides assertj-core
+dependency so we don’t have to add assertj-core dependency manually in
+our Spring boot project</li></ol><h2 id="ddd8b381-1a36-4247-9d09-0ef7fc2322ea" class="">You can use JUnit 5 assertions</h2><ol type="1" id="7f49cb7d-047a-4bba-96c5-7a8a94ead05a" class="numbered-list" start="1"><li>JUnit 5 assertAll</li></ol><ol type="1" id="63ba687b-eb79-40a1-95fc-c97656cd9337" class="numbered-list" start="2"><li>JUnit 5 assertArrayEquals</li></ol><ol type="1" id="142c13b4-be2d-4019-93a9-91051fc6f2f1" class="numbered-list" start="3"><li>JUnit 5 assertEquals</li></ol><ol type="1" id="4cbbd52d-465c-4e01-885d-4586a385959b" class="numbered-list" start="4"><li>JUnit 5 assertNotEquals</li></ol><ol type="1" id="cc55616d-0f1a-4ea0-89d8-5987155e7fbb" class="numbered-list" start="5"><li>JUnit 5 assertNotSame</li></ol><ol type="1" id="4fc8836c-3dd7-44bc-8cbe-a10e2130e6cb" class="numbered-list" start="6"><li>JUnit 5 assertNull and assertNotNull</li></ol><ol type="1" id="89d2869c-882e-4cb5-bcc7-9cf76f44bc81" class="numbered-list" start="7"><li>JUnit 5 assertSame</li></ol><ol type="1" id="f93c221c-ae5d-4230-a124-90ee63501e57" class="numbered-list" start="8"><li>JUnit 5 assertThrows</li></ol><ol type="1" id="24ebd4c9-f785-4c58-9939-60967eb3bfa5" class="numbered-list" start="9"><li>JUnit 5 assertTimeout</li></ol><ol type="1" id="3180cc72-63fa-41e5-b485-2a97018184b5" class="numbered-list" start="10"><li>JUnit 5 assertFalse</li></ol><ol type="1" id="6a599b57-c7f2-4960-97b8-4f7f6ebee399" class="numbered-list" start="11"><li>JUnit 5 assertTrue</li></ol><p id="9b4aa5b1-47dd-456a-a7dc-76ff4a4584cd" class="">
+</p></div><div id="9cf2f140-7b01-47a0-b940-c2757a1873fb" style="width:50%" class="column"><h2 id="0901a858-90fe-42e3-b03f-63a6f387a8af" class="">Why I use AssertJ?</h2><ol type="1" id="ae3d7bdf-0938-4bb6-b787-70f5ded83a3d" class="numbered-list" start="1"><li>Easy to learn: Quick start</li></ol><ol type="1" id="b700dc2b-1bf6-43e1-8faa-d09ffa1c7755" class="numbered-list" start="2"><li>Easy to use: you just need to add a dependency and static import in your
+test class to start using AssertJ.</li></ol><ol type="1" id="c0083d65-cf05-434b-a67a-eeab7b1a6023" class="numbered-list" start="3"><li>Fluent APIs: AssertJ helps you to diversify your assertions.</li></ol><ol type="1" id="32141171-6174-4560-af03-8c960b38ae37" class="numbered-list" start="4"><li>More readable code auto-completion: AssertJ provides auto-completion
+in IDEs. So you don&#x27;t need to remember all method names</li></ol><p id="3a9f81ec-a5b2-41cb-a393-1a9a1b49134a" class="">
+</p><h2 id="6fcfbe51-dbb7-49d0-b607-4dd3e74d6a8e" class="">What is Unit Testing</h2><p id="2c93e0ec-60be-46e8-80aa-3ad9b29910ec" class="">
+In Java, JUnit framework is used for unit testing Java applications
+Most of the times one component will depend on other component(s),
+so while implementing unit tests we should mock the dependencies
+with the desired behaviour using frameworks like Mockito.</p><h2 id="4a8637dc-2cf5-4440-b7b5-3f817e49794c" class="">Integration Testing</h2><p id="33aeeb55-4214-40bd-aafd-3d55595b6807" class="">As the name suggests, integration tests focus on integrating different layers of the
+application. That also means no mocking is involved.
+Basically, we write integration tests for testing a feature which may involve
+interaction with multiple components.</p></div></div><p id="c0e2d73d-27f5-4ca6-88f0-18370d25ae48" class="">
+</p><p id="a40f5fb7-a427-4f03-ace0-b2e44489bdc8" class="">
+</p><h1 id="20203d07-b829-4483-8a54-7c86001f881d" class="">Section 3: Spring Boot - Unit Testing Repository Layer:</h1><div id="7466e46b-87d3-49b0-930e-a7b652b00962" class="column-list"><div id="ba62c9bc-0516-4622-850b-60a16bde7249" style="width:50%" class="column"><h2 id="41c66923-4fd9-4727-b812-c6a0dd8effc1" class="block-color-gray_background"><mark class="highlight-gray_background">3.1. Repository layer Unit testing overview: </mark></h2><blockquote id="5937728c-ae5c-4afe-a771-a6ef09cd9c50" class="">write multiple methods</blockquote><figure id="06492bb0-de3d-4808-8048-9ca591ad8e22" class="image"><a href="Junit%20&amp;%20MocKito%20aead0536e7a3462fafa035672580d500/Untitled%201.png"><img style="width:949px" src="Junit%20&amp;%20MocKito%20aead0536e7a3462fafa035672580d500/Untitled%201.png"/></a></figure><figure id="4d08799b-0eeb-47ed-ba87-e66e9f9ac58e" class="image"><a href="Junit%20&amp;%20MocKito%20aead0536e7a3462fafa035672580d500/Untitled%202.png"><img style="width:1045px" src="Junit%20&amp;%20MocKito%20aead0536e7a3462fafa035672580d500/Untitled%202.png"/></a></figure><p id="d50a5f31-275e-40e0-99b1-5b180e1d5199" class="">
+</p></div><div id="507baf4a-c838-4f17-aa0d-70bc65a996db" style="width:50%" class="column"><h2 id="ae61407a-88f8-42f3-8872-60e226b3eb22" class="block-color-gray_background">3.2. Spring Boot @DataJpaTest annotation:</h2><ol type="1" id="6ddd9ad2-722a-443a-aa2a-fa3973dde73e" class="numbered-list" start="1"><li>Spring Boot provides the <code>@DataJpaTest</code> annotation to test the persistence
+layer components that will autoconfigure in-memory embedded database
+for testing purposes.</li></ol><ol type="1" id="82eac4bc-ae65-4c6d-95dd-dc1ef5682b27" class="numbered-list" start="2"><li><code>@DataJpaTest </code>annotation
+The <code>@DataJpaTest</code> annotation doesn’t load other Spring beans
+(<code>@Components, @Controller, @Service</code>, and annotated beans) into
+ApplicationContext.</li></ol><ol type="1" id="e0d1e050-e415-4a98-aca1-a4427a183546" class="numbered-list" start="3"><li>By default, it scans for <code>@Entity</code> classes and configures Spring Data JPA
+repositories annotated with <code>@Repository</code> annotation </li></ol><ol type="1" id="c44ed796-1c00-4ed6-9977-177a277f1acd" class="numbered-list" start="4"><li>By default, tests annotated with <code>@DataJpaTest </code>are transactional and roll
+back at the end of each test.</li></ol></div></div><p id="aeaca809-1bb3-4dbf-bd54-ab53bdb17c40" class="">
+</p><h2 id="9ddde80d-400e-4238-83dd-ed28146aa49f" class="block-color-gray_background">3.3. Unit test for save employee operation:</h2><pre id="424501b0-d1d5-48bb-9f60-c7c439f8542e" class="code"><code>package com.example.junit.Junit.repository;
+
+import com.example.junit.Junit.model.Employee;
+import static org.assertj.core.api.Assertions.*;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+
+@DataJpaTest // to test repository layer
+class EmployeeRepositoryTest {
+
+    @Autowired
+    private EmployeeRepository employeeRepository;
+
+
+
+   /*
+   void given_when_then(){
+
+    ..this is the naming convention that we will be following
+
+    }
+     */
+   @Test // junit test for save employee operation
+   @DisplayName(&quot;Unit test case For Save Employee Operation&quot;)
+    void givenEmployeeObject_whenSave_thenReturnSavedEmployeeObject(){
+        //1. given- precondition or setup
+
+        Employee employee = Employee.builder()
+                .id(1l)
+                .firstName(&quot;Ramesh&quot;)
+                .lastName(&quot;Ramesh&quot;)
+                .email(&quot;ramesh@gmail.com&quot;)
+                .build();
+        //2. when - Behaviour or action that we are going to test
+        Employee savedEmployee = employeeRepository.save(employee);
+
+        //3. then - verify object
+        //import org.assertj.core.api.Assertions;
+        assertThat(savedEmployee).isNotNull();
+       assertThat(savedEmployee.getId()).isPositive();
+
+
+
+    }
+
+}</code></pre><h2 id="745baf08-7221-4e0a-8093-366b6b7ed9ba" class="block-color-gray_background">3.4 Unit test for get all employees operation:</h2><pre id="55254870-653d-4c9c-8420-5f7fd4754f37" class="code"><code>@Test
+    void givenEmployeeList_whenFindAll_thenEmployeeList(){
+       //given
+        Employee employee = Employee.builder()
+                .id(1l)
+                .firstName(&quot;Ramesh&quot;)
+                .lastName(&quot;Ramesh&quot;)
+                .email(&quot;ramesh@gmail.com&quot;)
+                .build();
+        Employee employee1 = Employee.builder()
+                .id(2l)
+                .firstName(&quot;prata&quot;)
+                .lastName(&quot;Ramaaaasdsdsesh&quot;)
+                .email(&quot;rameasawssdsh@gmail.com&quot;)
+                .build();
+
+
+
+        employeeRepository.save(employee);
+        employeeRepository.save(employee1);
+        //when
+        List&lt;Employee&gt; listOfEMployeee = employeeRepository.findAll();
+
+        //then
+        assertThat(listOfEMployeee).isNotNull();
+        assertThat(listOfEMployeee.size()).isEqualTo(2);
+
+    }</code></pre><h2 id="02a8371e-a12c-4bd3-ae31-03b9f5652774" class="">3.5 Unit test for get employee by id operation</h2><pre id="87095f6e-81e5-4add-99b8-8a3ba6fa8340" class="code"><code>@Test
+    @DisplayName(&quot;Unit test case FindById&quot;)
+    void givenEmployeeObject_whenFindByID_thenReturnEmployeeObject() {
+        //1. given- precondition or setup
+        Employee employee = Employee.builder()
+                .id(1l)
+                .firstName(&quot;Ramesh&quot;)
+                .lastName(&quot;Ramesh&quot;)
+                .email(&quot;ramesh@gmail.com&quot;)
+                .build();
+        Employee employee1 = Employee.builder()
+                .id(2l)
+                .firstName(&quot;prata&quot;)
+                .lastName(&quot;Ramaaaasdsdsesh&quot;)
+                .email(&quot;rameasawssdsh@gmail.com&quot;)
+                .build();
+
+
+        employeeRepository.save(employee);
+        employeeRepository.save(employee1);
+        //2. when - Behaviour or action that we are going to test
+        Optional&lt;Employee&gt; byId = employeeRepository.findById(1l);
+
+        //3. then - verify object
+
+        //import org.assertj.core.api.Assertions;
+        assertThat(byId.get()).isNotNull();
+    }</code></pre><h2 id="6e7cdd00-30d0-4a80-8da7-de6959134ffc" class="">3.6 Unit test for get employee by email operation (Spring Data JPA query method)</h2><pre id="f07abe95-5658-464d-bb24-a11c58709c45" class="code"><code>
+@Test
+    @DisplayName(&quot;Find By Email Operation&quot;)
+    void givenEmployeeEmail_whenFindByEmail_thenReturnEmployeeObject() {
+        //1. given- precondition or setup
+        Employee employee = Employee.builder()
+                .id(1l)
+                .firstName(&quot;Ramesh&quot;)
+                .lastName(&quot;Ramesh&quot;)
+                .email(&quot;ramesh@gmail.com&quot;)
+                .build();
+
+        employeeRepository.save(employee);
+
+        //2. when - Behaviour or action that we are going to test
+        Optional&lt;Employee&gt; byEmail = employeeRepository.findByEmail(&quot;ramesh@gmail.com&quot;);
+        //3. then - verify object
+        assertThat(byEmail.get()).isNotNull();
+        //import org.assertj.core.api.Assertions;
+
+    }</code></pre><p id="78aa0f10-7463-4fc2-a82f-6b469caad2dc" class="">
+</p><h2 id="cd0ffce5-7095-482a-a8a2-35edf22ecae2" class="">3.7 Unit test for update employee operation</h2><pre id="59060108-8ae0-4373-8918-2c75938b50de" class="code"><code>@Test
+    @DisplayName(&quot;Update Operation&quot;)
+    void givenEmployeeObject_whenUpdateEmployee_thenReturnUpdatedEmployee() {
+        //1. given- precondition or setup
+        Employee employee = Employee.builder()
+                .id(1L)
+                .firstName(&quot;Ramesh&quot;)
+                .lastName(&quot;Ramesh&quot;)
+                .email(&quot;ramesh@gmail.com&quot;)
+                .build();
+
+        employeeRepository.save(employee);
+        //2. when - Behaviour or action that we are going to test
+        Employee updatedEmployee = employeeRepository.findById(employee.getId()).get();
+        updatedEmployee.setEmail(&quot;Pratap&quot;);
+        updatedEmployee.setFirstName(&quot;pratap&quot;);
+
+        Employee saved = employeeRepository.save(updatedEmployee);
+
+        //3. then - verify object
+        assertThat(saved).isNotNull();
+        assertThat(saved.getEmail()).isEqualTo(&quot;Pratap&quot;);
+        //import org.assertj.core.api.Assertions;
+
+    }</code></pre><p id="dba42ddf-b0fa-42c0-b52d-bf8d3df06c83" class="">
+</p><h2 id="595ddf17-b395-452a-9d78-972f2f38ef06" class="block-color-gray_background">3.8 Unit test for delete employee operation</h2><pre id="db3a6337-9559-4fac-a536-c1bf641cdcd0" class="code"><code>@Test
+    @DisplayName(&quot;Delete&quot;)
+    void given_when_then() {
+        //1. given- precondition or setup
+        Employee employee = Employee.builder()
+                .id(1L)
+                .firstName(&quot;Ramesh&quot;)
+                .lastName(&quot;Ramesh&quot;)
+                .email(&quot;ramesh@gmail.com&quot;)
+                .build();
+
+        employeeRepository.save(employee);
+        //2. when - Behaviour or action that we are going to test
+        employeeRepository.delete(employee);
+        //3. then - verify object
+        assertThat(employeeRepository.findAll().size()).isLessThan(1);
+        //import org.assertj.core.api.Assertions;
+
+    }</code></pre><h2 id="02ebd222-77fd-4b22-a2aa-0ecf2732bf30" class="">3.9 Unit test Spring Data JPA custom query method using JPQL with index parameters</h2><pre id="9ef35a19-883f-4859-bef6-eaafe5e412d1" class="code"><code>@DisplayName(&quot;Unit test case Name&quot;)
+        void givenFirstNameAndLastName_whenUsingJPQL_thenReturnEmployee(){
+            //1. given- precondition or setup
+        Employee employee = Employee.builder()
+                .id(1L)
+                .firstName(&quot;Ramesh&quot;)
+                .lastName(&quot;Ramesh&quot;)
+                .email(&quot;ramesh@gmail.com&quot;)
+                .build();
+
+        employeeRepository.save(employee);
+        Employee employee1= Employee.builder()
+                .id(2L)
+                .firstName(&quot;pratap&quot;)
+                .lastName(&quot;pratap&quot;)
+                .email(&quot;ramesh@gmail1.com&quot;)
+                .build();
+
+        employeeRepository.save(employee1);
+            //2. when - Behaviour or action that we are going to test
+        Employee employeeRepositoryByJPQL = employeeRepository.findByJPQL(&quot;pratap&quot;, &quot;pratap&quot;);
+
+        //3. then - verify object
+            //import org.assertj.core.api.Assertions;
+assertThat(employeeRepositoryByJPQL).isNotNull();
+        }</code></pre><p id="1bcb818d-9c92-4d23-b586-52c38bbaf244" class="">
+</p><h2 id="ee46f8b8-3d7a-46ac-966e-829ffdcf7a22" class="">3.10 Unit test Spring Data JPA custom query method using JPQL with named parameters</h2><pre id="066b5a7d-2538-4ab5-8994-c8b4742f2139" class="code"><code>@Test
+    @DisplayName(&quot;Unit test case Name&quot;)
+    void givenFirstNameAndLastName_whenUsingJPQLNamedParam_thenReturnEmployee() {
+        //1. given- precondition or setup
+        Employee employee = Employee.builder()
+                .id(1L)
+                .firstName(&quot;Ramesh&quot;)
+                .lastName(&quot;Ramesh&quot;)
+                .email(&quot;ramesh@gmail.com&quot;)
+                .build();
+
+        employeeRepository.save(employee);
+        Employee employee1 = Employee.builder()
+                .id(2L)
+                .firstName(&quot;pratap&quot;)
+                .lastName(&quot;pratap&quot;)
+                .email(&quot;ramesh@gmail1.com&quot;)
+                .build();
+
+        employeeRepository.save(employee1);
+        //2. when - Behaviour or action that we are going to test
+        Employee employeeRepositoryByJPQL = employeeRepository.findByJPQLNamedParams(&quot;pratap&quot;, &quot;pratap&quot;);
+
+        //3. then - verify object
+        //import org.assertj.core.api.Assertions;
+        assertThat(employeeRepositoryByJPQL).isNotNull();
+    }</code></pre><p id="5049a4c2-c1f8-4545-985f-61ed7112920d" class="">
+</p><h2 id="4bd82667-0cc1-4b6d-bb4a-c01c53c7fa61" class="">3.11 Before Each:</h2><pre id="0f1a892f-b803-45cc-aaa5-5ea4fbd66034" class="code"><code>@BeforeEach
+    void setUp() {
+        employee = Employee.builder()
+                .id(1L)
+                .firstName(&quot;Ramesh&quot;)
+                .lastName(&quot;Ramesh&quot;)
+                .email(&quot;ramesh@gmail.com&quot;)
+                .build();
+    }</code></pre><p id="9392a8a4-99ca-4f08-941b-b0d25d452a29" class="">
+</p><h1 id="a7ce1e9a-eeb5-494a-bbcc-a355b42e0d1a" class="">Section 4: Spring Boot - Unit Testing Service Layer:</h1><figure id="82340da7-1dbc-4c7a-9f4f-d2d36660a807" class="image"><a href="Junit%20&amp;%20MocKito%20aead0536e7a3462fafa035672580d500/Untitled%203.png"><img style="width:1064px" src="Junit%20&amp;%20MocKito%20aead0536e7a3462fafa035672580d500/Untitled%203.png"/></a></figure><p id="2d3a553b-97e4-4552-b897-7edfd672129d" class="">
+</p><h2 id="653a7b70-f3ee-41d2-b28a-0ff05134f3f1" class="">4.1 Save Employee Method→ Using mock Methods</h2><pre id="20c503d1-2e9e-4645-aa09-080bd75a2af3" class="code"><code>package com.example.junit.Junit.service.internal;
+
+import com.example.junit.Junit.model.Employee;
+import com.example.junit.Junit.repository.EmployeeRepository;
+import com.example.junit.Junit.service.EmployeeService;
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.mockito.BDDMockito;
+import org.mockito.Mockito;
+
+import java.util.Optional;
+
+class EmployeeServiceImplTest {
+
+    private EmployeeRepository employeeRepository;
+
+    private EmployeeService employeeService;
+
+    @BeforeEach
+    public void setup() {
+        employeeRepository = Mockito.mock(EmployeeRepository.class);
+        employeeService = new EmployeeServiceImpl(employeeRepository);
+    }
+
+    @Test
+    @DisplayName(&quot;Unit test case Name&quot;)
+    void givenEmployeeObject_whenSaveEmploye_thenReturnEmployee() {
+        Employee employee = Employee.builder()
+                .id(1l)
+                .firstName(&quot;Pratap&quot;)
+                .lastName(&quot;Adhav&quot;)
+                .email(&quot;email@email&quot;)
+                .build();
+        //stubbing methods
+        BDDMockito.given(employeeRepository.findByEmail(employee.getEmail()))
+                .willReturn(Optional.empty());
+        BDDMockito.given(employeeRepository.save(employee)).willReturn(employee);
+
+        //when
+        Employee savedEmployee = employeeService.saveEmployee(employee);
+
+        //then
+        Assertions.assertThat(savedEmployee).isNotNull();
+
+    }
+
+}</code></pre><p id="476efe6a-6def-4c78-96cb-aba1c48147d6" class="">
+</p><h2 id="5b18395c-2239-4117-b487-faadc0ad51e0" class="">4.1.1 Save Employee Method→ Using @Mock and @InjectMocks annotations to mock the object</h2><pre id="2ffcae23-079a-45fe-9300-9fc3c139a0e6" class="code"><code>package com.example.junit.Junit.service.internal;
+
+import com.example.junit.Junit.model.Employee;
+import com.example.junit.Junit.repository.EmployeeRepository;
+import com.example.junit.Junit.service.EmployeeService;
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import static org.mockito.BDDMockito.given;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.util.Optional;
+
+@ExtendWith(MockitoExtension.class)
+class EmployeeServiceImplTest {
+
+    @Mock
+    private EmployeeRepository employeeRepository;
+
+    @InjectMocks
+    private EmployeeServiceImpl employeeService;
+    private Employee employee ;
+    @BeforeEach
+    public void setup() {
+         employee = Employee.builder()
+                .id(1l)
+                .firstName(&quot;Pratap&quot;)
+                .lastName(&quot;Adhav&quot;)
+                .email(&quot;email@email&quot;)
+                .build();
+    }
+
+    @Test
+    @DisplayName(&quot;Unit test case Name&quot;)
+    void givenEmployeeObject_whenSaveEmploye_thenReturnEmployee() {
+
+        //stubbing methods
+        given(employeeRepository.findByEmail(employee.getEmail()))
+                .willReturn(Optional.empty());
+        given(employeeRepository.save(employee)).willReturn(employee);
+
+        //when
+        Employee savedEmployee = employeeService.saveEmployee(employee);
+
+        //then
+        Assertions.assertThat(savedEmployee).isNotNull();
+
+    }
+
+}</code></pre><p id="b7741e49-e294-4815-ade4-41b6179d8c1d" class="">
+</p><h2 id="8f0ca85d-97b9-4450-b5b8-46632786c8ce" class="">4.1.2 Unit test for saveEmployee method which throws Exception:</h2><pre id="9c99fbd0-46ea-4190-8372-ccdc3c33fa32" class="code"><code>@Test
+	    @DisplayName(&quot;Exception throws&quot;)
+	    void givenExistingEmail_whenSaveEmploye_thenThrowsException() {
+
+        //stubbing methods
+        given(employeeRepository.findByEmail(employee.getEmail()))
+                .willReturn(Optional.of(employee));
+        
+        org.junit.jupiter.api.Assertions.assertThrows(ResourceNotFoundException.class,()-&gt;{
+            employeeService.saveEmployee(employee);
+        });
+        // this last method should not get executed in the class
+        verify(employeeRepository, never()).save(any(Employee.class));
+
+    }</code></pre><p id="47008340-33ef-4d4e-a656-f59578faef54" class="">
+</p><h2 id="dc638222-024f-4825-890e-d8133fbc37ed" class="">4.2 Get All EMployee List</h2><pre id="13d8d574-0a1d-4311-809d-5ef994879f60" class="code"><code>
+@Test
+    @DisplayName(&quot;All Employee&quot;)
+    void givenEmployeeList_whenGetAllEmployee_thenReturnEmployeeLists() {
+        Employee employee2 = Employee.builder()
+                .id(2l)
+                .firstName(&quot;Pratap1&quot;)
+                .lastName(&quot;Adhav1&quot;)
+                .email(&quot;email@email1&quot;)
+                .build();
+        Employee employee3 = Employee.builder()
+                .id(3l)
+                .firstName(&quot;Pratap2&quot;)
+                .lastName(&quot;Adhav2&quot;)
+                .email(&quot;email@email2&quot;)
+                .build();
+        Employee employee4 = Employee.builder()
+                .id(4l)
+                .firstName(&quot;Pratap3&quot;)
+                .lastName(&quot;Adhav3&quot;)
+                .email(&quot;email@email3&quot;)
+                .build();
+        given(employeeRepository.findAll()).willReturn(Arrays.asList(employee4, employee3, employee2, employee));
+
+//when
+        List&lt;Employee&gt; allEmployee = employeeService.getAllEmployee();
+
+        Assertions.assertThat(allEmployee.size()).isEqualTo(4);
+    }</code></pre><p id="8665f68d-c413-4de3-bc47-5b205ab66477" class="">
+</p><h2 id="0c2fc142-4a9e-4ab9-ac4d-2b5291cadfe9" class="">4.2.1 Get All Employee List -Negative Scenario:</h2><pre id="89e54bdd-2a3c-402a-934b-f74905801aaa" class="code"><code>@Test
+    @DisplayName(&quot;All Employee - Negative Senarioa&quot;)
+    void givenEmployeeList_whenGetAllEmployee_thenReturnEmptyEmployeeLists() {
+        Employee employee2 = Employee.builder()
+                .id(2l)
+                .firstName(&quot;Pratap1&quot;)
+                .lastName(&quot;Adhav1&quot;)
+                .email(&quot;email@email1&quot;)
+                .build();
+        Employee employee3 = Employee.builder()
+                .id(3l)
+                .firstName(&quot;Pratap2&quot;)
+                .lastName(&quot;Adhav2&quot;)
+                .email(&quot;email@email2&quot;)
+                .build();
+        Employee employee4 = Employee.builder()
+                .id(4l)
+                .firstName(&quot;Pratap3&quot;)
+                .lastName(&quot;Adhav3&quot;)
+                .email(&quot;email@email3&quot;)
+                .build();
+        given(employeeRepository.findAll()).willReturn(Collections.emptyList());
+
+//when
+        List&lt;Employee&gt; allEmployee = employeeService.getAllEmployee();
+
+        Assertions.assertThat(allEmployee.size()).isEqualTo(0);
+    }</code></pre><p id="dcd0932b-8b60-43a7-994b-4d88845dce73" class="">
+</p><h2 id="f48a72f5-d3c3-4050-b510-ef3fa8db2cce" class="">4.3 Unit test for Employee-Service get-Employee-Id method:</h2><pre id="298327c3-4a68-4de7-9b71-e86da84ec6c4" class="code"><code>@Test
+        @DisplayName(&quot;Get Employee By id&quot;)
+        void givenEmployee_whenFindById_thenReturnEmployee(){
+
+        given(employeeRepository.findById(employee.getId())).willReturn(Optional.of(employee));
+
+        Employee employeeByID = employeeService.getEmployeeByID(employee.getId());
+
+        Assertions.assertThat(employeeByID).isNotNull();
+
+    }</code></pre><p id="d41ecea6-01a7-4514-811b-65943cb259a8" class="">
+</p><h2 id="90a5a47e-881c-4fb7-9207-47f3a1e74492" class="">4.4 Unit test for Employee-Service updateEmployee method</h2><pre id="60673e3e-9296-4eed-be7a-1e86d2337174" class="code"><code>@Test
+    @DisplayName(&quot;Update Employee By id&quot;)
+    void givenEmployee_whenUpdate_thenReturnEmployee() {
+
+        given(employeeRepository.save(employee)).willReturn(employee);
+
+        Employee employeeByID = employeeService.updateEmployee(employee);
+
+        assertThat(employeeByID).isNotNull();
+
+    }</code></pre><p id="508b7458-b224-4140-98fc-4761472d6a71" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
